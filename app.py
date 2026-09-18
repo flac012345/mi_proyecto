@@ -90,11 +90,11 @@ QUIZ_QUESTIONS = [
 ]
 
 AUTHOR_INFO = {
-    "name": "Feibert Alirio Guzmán Pérez",
-    "role": "Software Architect & Full-Stack Engineer",
-    "bio": "Especialista en diseño de arquitecturas escalables, sistemas distribuidos, APIs de alto rendimiento y clean code con Python y ecosistemas cloud.",
-    "skills": ["Python / Flask", "Arquitectura Hexagonal", "Microservicios", "Event-Driven (Kafka)", "Docker & Cloud", "Redis & PostgreSQL", "Clean Code"],
-    "quote": "«La simplicidad y el desacoplamiento son el alma de las arquitecturas de software perdurables.»"
+    "name": "Miguel Ángel Raygosa Sánchez",
+    "role": "Ingeniería Informática (6.° Semestre) | Desarrollador Full Stack & Web",
+    "bio": "Estudiante de sexto semestre de Ingeniería Informática y Desarrollador Full Stack & Web. Apasionado por Python, Flask, diseño de arquitecturas limpias y tecnologías web modernas y escalables.",
+    "skills": ["Full-Stack & Web Dev", "Python / Flask", "JavaScript Moderno", "Arquitectura de Software", "APIs RESTful", "Bases de Datos", "Docker & Git", "Clean Code"],
+    "quote": "«Construyendo software con propósito: código limpio, arquitecturas escalables y soluciones web modernas.»"
 }
 
 @app.route('/')

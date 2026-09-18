@@ -217,7 +217,7 @@ Crea `templates/index.html` con la interfaz centrada, tipografía y gráficos SV
                 <p>Potenciado por Python y Flask.</p>
             </div>
         </div>
-        <p align="center" style="margin-top: 30px;">Creado por Feibert Alirio Guzmán Pérez</p>
+        <p align="center" style="margin-top: 30px;">Creado por Miguel Ángel Raygosa Sánchez</p>
     </div>
 
 </body>
@@ -285,4 +285,6 @@ Abre tu navegador en:
 ---
 
 ### 👤 Autor
-**Feibert Alirio Guzmán Pérez**
+**Miguel Ángel Raygosa Sánchez**
+- Estudiante de 6.° Semestre de Ingeniería Informática
+- Desarrollador Full Stack & Web
