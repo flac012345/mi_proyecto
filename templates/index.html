@@ -4,25 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenido a la Naturaleza | Flask App</title>
+    <title>Arquitectura de Software & Stack | Feibert Alirio Guzmán Pérez</title>
+    <meta name="description"
+        content="Plataforma interactiva sobre stacks y arquitecturas de software desarrollada con Python y Flask por Feibert Alirio Guzmán Pérez.">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,400&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,400&display=swap"
         rel="stylesheet">
 
     <style>
         :root {
-            --bg-gradient: linear-gradient(135deg, #0b2b1a 0%, #1b4332 40%, #2d6a4f 100%);
-            --card-bg: rgba(255, 255, 255, 0.08);
-            --card-border: rgba(255, 255, 255, 0.15);
+            --bg-gradient: radial-gradient(circle at 20% 20%, #133a28 0%, #0c2016 45%, #05130c 100%);
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --card-hover-bg: rgba(255, 255, 255, 0.09);
+            --card-border: rgba(149, 213, 178, 0.18);
             --primary-light: #d8f3dc;
             --accent-sage: #95d5b2;
             --accent-green: #52b788;
-            --accent-gold: #e9c46a;
+            --accent-green-glow: rgba(82, 183, 136, 0.35);
+            --accent-gold: #f4a261;
+            --accent-gold-light: #e9c46a;
+            --accent-red: #e76f51;
             --text-main: #f8f9fa;
             --text-sub: #b7e4c7;
+            --text-muted: #74a88c;
+            --glass-blur: blur(18px);
         }
 
         * {
@@ -31,144 +39,285 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background: var(--bg-gradient);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             color: var(--text-main);
             overflow-x: hidden;
             position: relative;
-            padding: 20px;
+            padding: 24px 16px 60px 16px;
         }
 
-        /* SVG Background Decorations */
+        /* SVG Background Glows */
         .bg-shape {
-            position: absolute;
+            position: fixed;
             z-index: 0;
-            opacity: 0.12;
+            opacity: 0.14;
             pointer-events: none;
+            filter: blur(40px);
         }
 
         .bg-shape-1 {
-            top: -50px;
-            left: -50px;
-            width: 400px;
+            top: -100px;
+            left: -100px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #52b788, transparent 70%);
+            border-radius: 50%;
         }
 
         .bg-shape-2 {
-            bottom: -80px;
-            right: -50px;
-            width: 450px;
+            bottom: -150px;
+            right: -100px;
+            width: 550px;
+            height: 550px;
+            background: radial-gradient(circle, #2d6a4f, transparent 70%);
+            border-radius: 50%;
         }
 
-        /* Container Principal */
-        .container {
+        /* Main Container */
+        .main-wrapper {
             position: relative;
             z-index: 1;
-            max-width: 900px;
-            width: 100%;
-            background: var(--card-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--card-border);
-            border-radius: 28px;
-            padding: 60px 40px;
-            text-align: center;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
-            animation: fadeIn 1s ease-out;
+            max-width: 1050px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Header e Icono Principal */
-        .hero-icon-wrapper {
-            display: inline-flex;
-            justify-content: center;
+        /* Navigation */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            width: 96px;
-            height: 96px;
-            background: linear-gradient(135deg, rgba(82, 183, 136, 0.2), rgba(149, 213, 178, 0.4));
-            border: 1px solid rgba(149, 213, 178, 0.4);
+            background: rgba(16, 42, 29, 0.6);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--card-border);
+            padding: 14px 26px;
+            border-radius: 100px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--primary-light);
+            font-weight: 700;
+            font-size: 1.05rem;
+        }
+
+        .brand-icon {
+            width: 34px;
+            height: 34px;
+            background: linear-gradient(135deg, #52b788, #2d6a4f);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px var(--accent-green-glow);
+        }
+
+        .brand-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: #ffffff;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            list-style: none;
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            color: var(--text-sub);
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 8px 18px;
+            border-radius: 50px;
+            transition: all 0.25s ease;
+            border: 1px solid transparent;
+        }
+
+        .nav-btn:hover {
+            color: #ffffff;
+            background: rgba(82, 183, 136, 0.15);
+            border-color: rgba(82, 183, 136, 0.3);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(135deg, rgba(82, 183, 136, 0.25), rgba(45, 106, 79, 0.5));
+            border-color: var(--accent-green);
+            color: #ffffff;
+        }
+
+        /* Hero Container */
+        .hero-card {
+            background: var(--card-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--card-border);
+            border-radius: 32px;
+            padding: 56px 40px 48px 40px;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+            position: relative;
+            animation: fadeIn 0.9s ease-out;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 18px;
+            background: rgba(45, 106, 79, 0.5);
+            border: 1px solid var(--accent-green);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--primary-light);
+            font-weight: 600;
+            margin-bottom: 22px;
+        }
+
+        .status-dot {
+            width: 9px;
+            height: 9px;
+            background-color: var(--accent-green);
             border-radius: 50%;
-            margin-bottom: 24px;
-            box-shadow: 0 10px 25px rgba(82, 183, 136, 0.25);
-            transition: transform 0.4s ease;
+            box-shadow: 0 0 10px var(--accent-green);
+            animation: pulse 2s infinite;
         }
 
-        .hero-icon-wrapper:hover {
-            transform: scale(1.08) rotate(5deg);
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(82, 183, 136, 0.8); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 8px rgba(82, 183, 136, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(82, 183, 136, 0); }
         }
 
-        .hero-icon {
-            width: 52px;
-            height: 52px;
-            fill: var(--accent-sage);
-        }
-
-        /* Tipografía Grande */
         h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
+            font-size: 3.2rem;
             font-weight: 800;
             line-height: 1.15;
-            background: linear-gradient(135deg, #ffffff 30%, var(--accent-sage) 100%);
+            background: linear-gradient(135deg, #ffffff 20%, #b7e4c7 70%, var(--accent-gold-light) 100%);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 16px;
-            letter-spacing: -0.5px;
+            margin-bottom: 18px;
         }
 
         .subtitle {
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             color: var(--text-sub);
-            max-width: 640px;
-            margin: 0 auto 40px auto;
-            line-height: 1.6;
-            font-weight: 400;
+            max-width: 680px;
+            margin: 0 auto 36px auto;
+            line-height: 1.65;
         }
 
-        /* Cuadrícula de Tarjetas con SVGs */
+        .hero-actions {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #52b788 0%, #2d6a4f 100%);
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 25px var(--accent-green-glow);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 30px rgba(82, 183, 136, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--primary-light);
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 14px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid var(--card-border);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: var(--accent-sage);
+            transform: translateY(-2px);
+        }
+
+        /* Pillars Grid */
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 20px;
-            margin-top: 30px;
+            text-align: left;
         }
 
         .feature-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--card-border);
             border-radius: 20px;
-            padding: 28px 20px;
+            padding: 26px 22px;
             transition: all 0.3s ease;
-            text-align: center;
         }
 
         .feature-card:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-6px);
+            background: var(--card-hover-bg);
+            transform: translateY(-5px);
             border-color: var(--accent-green);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
         }
 
-        .card-icon {
-            width: 44px;
-            height: 44px;
+        .card-icon-box {
+            width: 46px;
+            height: 46px;
+            background: rgba(82, 183, 136, 0.15);
+            border: 1px solid rgba(82, 183, 136, 0.3);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin-bottom: 16px;
-            fill: var(--accent-green);
+            color: var(--accent-sage);
+        }
+
+        .card-icon-box svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
         }
 
         .feature-card h3 {
@@ -181,140 +330,928 @@
         .feature-card p {
             font-size: 0.92rem;
             color: var(--text-sub);
+            line-height: 1.55;
+        }
+
+        /* AUTHOR SECTION */
+        .author-section {
+            background: linear-gradient(135deg, rgba(19, 58, 40, 0.7) 0%, rgba(12, 32, 22, 0.85) 100%);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--card-border);
+            border-radius: 32px;
+            padding: 48px 40px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
+        }
+
+        .author-layout {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 36px;
+            align-items: center;
+        }
+
+        .author-avatar-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .author-avatar-frame {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            padding: 5px;
+            background: linear-gradient(135deg, var(--accent-gold-light), var(--accent-green), #1b4332);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            margin-bottom: 16px;
+        }
+
+        .author-avatar-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #0f2b1d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .author-avatar-inner svg {
+            width: 72px;
+            height: 72px;
+            fill: var(--accent-sage);
+        }
+
+        .author-badge-indicator {
+            position: absolute;
+            bottom: 4px;
+            right: 10px;
+            background: #52b788;
+            color: #061c11;
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 20px;
+            border: 2px solid #0f2b1d;
+        }
+
+        .author-title-badge {
+            display: inline-block;
+            background: rgba(233, 196, 106, 0.15);
+            border: 1px solid var(--accent-gold-light);
+            color: var(--accent-gold-light);
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 12px;
+            border-radius: 30px;
+            margin-bottom: 6px;
+        }
+
+        .author-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff 30%, var(--accent-sage) 70%, var(--accent-gold-light) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 6px;
+        }
+
+        .author-role {
+            color: var(--accent-sage);
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .author-quote {
+            font-style: italic;
+            color: var(--primary-light);
+            background: rgba(0, 0, 0, 0.22);
+            padding: 14px 20px;
+            border-left: 3px solid var(--accent-gold-light);
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
             line-height: 1.5;
         }
 
-        /* Badge de Servidor */
-        .status-badge {
+        .author-bio {
+            color: var(--text-sub);
+            font-size: 0.95rem;
+            line-height: 1.65;
+            margin-bottom: 22px;
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+        }
+
+        .skill-tag {
+            background: rgba(82, 183, 136, 0.12);
+            border: 1px solid rgba(82, 183, 136, 0.3);
+            color: var(--primary-light);
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 5px 14px;
+            border-radius: 20px;
+            transition: all 0.2s ease;
+        }
+
+        .skill-tag:hover {
+            background: rgba(82, 183, 136, 0.28);
+            border-color: var(--accent-green);
+            transform: translateY(-2px);
+        }
+
+        /* QUIZ SECTION */
+        .quiz-section {
+            background: var(--card-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--card-border);
+            border-radius: 32px;
+            padding: 48px 40px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        .quiz-section-tag {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 8px 18px;
-            background: rgba(45, 106, 79, 0.6);
-            border: 1px solid var(--accent-green);
+            padding: 6px 16px;
+            background: rgba(233, 196, 106, 0.15);
+            border: 1px solid rgba(233, 196, 106, 0.4);
             border-radius: 50px;
+            font-size: 0.82rem;
+            color: var(--accent-gold-light);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 12px;
+        }
+
+        .quiz-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.3rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .quiz-header p {
+            color: var(--text-sub);
+            font-size: 1.02rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .quiz-box {
+            background: rgba(16, 42, 29, 0.65);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 34px 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .quiz-progress-wrapper {
+            margin-bottom: 26px;
+        }
+
+        .quiz-meta-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
             font-size: 0.88rem;
-            color: var(--primary-light);
             font-weight: 600;
-            margin-bottom: 20px;
         }
 
-        .status-dot {
-            width: 10px;
-            height: 10px;
-            background-color: var(--accent-green);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--accent-green);
-            animation: pulse 2s infinite;
+        .quiz-step-count {
+            color: var(--accent-sage);
         }
 
-        @keyframes pulse {
-            0% {
-                transform: scale(0.95);
-                box-shadow: 0 0 0 0 rgba(82, 183, 136, 0.7);
-            }
-
-            70% {
-                transform: scale(1);
-                box-shadow: 0 0 0 8px rgba(82, 183, 136, 0);
-            }
-
-            100% {
-                transform: scale(0.95);
-                box-shadow: 0 0 0 0 rgba(82, 183, 136, 0);
-            }
+        .quiz-category-badge {
+            background: rgba(82, 183, 136, 0.18);
+            color: var(--primary-light);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            border: 1px solid rgba(82, 183, 136, 0.3);
         }
 
-        /* Responsivo */
-        @media (max-width: 600px) {
-            .container {
-                padding: 40px 24px;
-            }
+        .progress-bar-track {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            overflow: hidden;
+        }
 
-            h1 {
-                font-size: 2.3rem;
-            }
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #52b788, var(--accent-gold-light));
+            border-radius: 10px;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 12px rgba(82, 183, 136, 0.6);
+        }
 
-            .subtitle {
-                font-size: 1.05rem;
-            }
+        .question-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .question-topic {
+            color: var(--accent-gold-light);
+            font-size: 0.88rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .option-item {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-align: left;
+            user-select: none;
+        }
+
+        .option-item:hover:not(.disabled) {
+            background: rgba(255, 255, 255, 0.09);
+            border-color: var(--accent-sage);
+            transform: translateX(6px);
+        }
+
+        .option-indicator {
+            min-width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--primary-light);
+        }
+
+        .option-text {
+            color: var(--text-main);
+            font-size: 0.98rem;
+            line-height: 1.5;
+            padding-top: 4px;
+        }
+
+        .option-item.correct {
+            background: rgba(82, 183, 136, 0.22) !important;
+            border-color: #52b788 !important;
+            box-shadow: 0 0 15px rgba(82, 183, 136, 0.35);
+        }
+
+        .option-item.correct .option-indicator {
+            background: #52b788;
+            color: #061c11;
+            border-color: #52b788;
+        }
+
+        .option-item.incorrect {
+            background: rgba(231, 111, 81, 0.2) !important;
+            border-color: #e76f51 !important;
+            box-shadow: 0 0 15px rgba(231, 111, 81, 0.3);
+        }
+
+        .option-item.incorrect .option-indicator {
+            background: #e76f51;
+            color: #ffffff;
+            border-color: #e76f51;
+        }
+
+        .option-item.disabled {
+            cursor: default;
+        }
+
+        .feedback-box {
+            display: none;
+            background: rgba(14, 38, 27, 0.85);
+            border-radius: 16px;
+            border: 1px solid var(--accent-sage);
+            padding: 18px 22px;
+            margin-bottom: 24px;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+        }
+
+        .feedback-header.is-correct { color: #52b788; }
+        .feedback-header.is-incorrect { color: #f4a261; }
+
+        .feedback-explanation {
+            color: var(--text-sub);
+            font-size: 0.93rem;
+            line-height: 1.6;
+        }
+
+        .quiz-footer {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .btn-next {
+            display: none;
+            background: linear-gradient(135deg, #52b788, #2d6a4f);
+            color: #ffffff;
+            font-size: 0.96rem;
+            font-weight: 700;
+            padding: 12px 28px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            box-shadow: 0 6px 18px var(--accent-green-glow);
+            transition: all 0.25s ease;
+        }
+
+        .btn-next:hover {
+            transform: translateY(-2px);
+        }
+
+        .results-box {
+            display: none;
+            text-align: center;
+            padding: 30px 10px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .result-trophy {
+            font-size: 3.5rem;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+
+        .result-rank-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #ffffff;
+            margin-bottom: 6px;
+        }
+
+        .result-score-badge {
+            display: inline-block;
+            background: rgba(82, 183, 136, 0.2);
+            border: 1px solid var(--accent-green);
+            color: var(--primary-light);
+            font-size: 1.25rem;
+            font-weight: 800;
+            padding: 8px 24px;
+            border-radius: 40px;
+            margin-bottom: 18px;
+        }
+
+        .result-desc {
+            color: var(--text-sub);
+            max-width: 540px;
+            margin: 0 auto 28px auto;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .btn-restart {
+            background: linear-gradient(135deg, var(--accent-gold), #e76f51);
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 13px 32px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(231, 111, 81, 0.35);
+            transition: all 0.25s ease;
+        }
+
+        .btn-restart:hover {
+            transform: translateY(-2px);
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            padding: 24px 0 10px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        footer strong {
+            color: var(--accent-sage);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .hero-card { padding: 40px 22px; }
+            h1 { font-size: 2.3rem; }
+            .author-layout { grid-template-columns: 1fr; text-align: center; }
+            .author-avatar-card { margin: 0 auto; }
+            .author-role, .skills-container { justify-content: center; }
+            .quiz-section { padding: 34px 20px; }
+            .quiz-box { padding: 24px 18px; }
+            .top-nav { flex-direction: column; gap: 12px; border-radius: 24px; }
         }
     </style>
 </head>
 
 <body>
 
-    <!-- SVG Fondo Decorativo 1: Hojas -->
-    <svg class="bg-shape bg-shape-1" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-        <path fill="#52B788"
-            d="M44.7,-67.6C56.9,-58.5,65.1,-44.6,70.7,-29.9C76.3,-15.1,79.2,0.6,76.5,15.6C73.8,30.6,65.4,45,53.8,55.3C42.2,65.6,27.3,71.8,11.5,73.6C-4.3,75.4,-21.1,72.7,-35.8,65.1C-50.5,57.5,-63.1,45,-70.6,29.9C-78.1,14.8,-80.5,-2.9,-76.3,-19C-72.1,-35.1,-61.3,-49.6,-47.5,-58.4C-33.7,-67.2,-16.9,-70.3,-0.1,-70.2C16.6,-70.1,32.5,-76.7,44.7,-67.6Z"
-            transform="translate(100 100)" />
-    </svg>
+    <div class="bg-shape bg-shape-1"></div>
+    <div class="bg-shape bg-shape-2"></div>
 
-    <!-- SVG Fondo Decorativo 2: Montañas/Ramas -->
-    <svg class="bg-shape bg-shape-2" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-        <path fill="#74C69D"
-            d="M38.1,-52.3C49.7,-43.8,60,-32.8,65.2,-19.4C70.4,-6.1,70.4,9.6,64.8,23.3C59.2,37,47.9,48.7,34.7,56.7C21.4,64.7,6.3,69,-9.2,70.3C-24.7,71.6,-40.5,69.9,-52.8,61.4C-65.1,52.8,-73.8,37.3,-76.2,20.8C-78.6,4.3,-74.6,-13.3,-66.1,-27.8C-57.6,-42.3,-44.5,-53.8,-30.7,-61.2C-16.9,-68.5,-2.4,-71.7,10.6,-68C23.6,-64.3,26.5,-60.8,38.1,-52.3Z"
-            transform="translate(100 100)" />
-    </svg>
+    <div class="main-wrapper">
 
-    <div class="container">
+        <nav class="top-nav">
+            <a href="#" class="brand-logo">
+                <div class="brand-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                    </svg>
+                </div>
+                <span>Architecture & Stack Hub</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#inicio" class="nav-btn">Inicio</a></li>
+                <li><a href="#autor" class="nav-btn">Arquitecto</a></li>
+                <li><a href="#quiz" class="nav-btn active">Quiz de Arquitectura</a></li>
+            </ul>
+        </nav>
 
-        <!-- Estado del Servidor -->
-        <div class="status-badge">
-            <span class="status-dot"></span>
-            Servidor Flask Activo & Corriendo
-        </div>
-
-        <!-- Icono Principal SVG: Árbol de la Vida -->
-        <div class="hero-icon-wrapper">
-            <svg class="hero-icon" viewBox="0 0 24 24">
-                <path
-                    d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12C20,14.4 18.9,16.5 17.2,18C15.8,16.6 13.9,15.6 12,15.6C10.1,15.6 8.2,16.6 6.8,18C5.1,16.5 4,14.4 4,12A8,8 0 0,1 12,4M12,6C9.8,6 8,7.8 8,10C8,12.2 9.8,14 12,14C14.2,14 16,12.2 16,10C16,7.8 14.2,6 12,6Z" />
-            </svg>
-        </div>
-
-        <!-- Título Principal Centrado y Grande -->
-        <h1>¡Bienvenido a la Experiencia Flask!</h1>
-        <p class="subtitle">Tu aplicación en Python está lista, conectada y lista para florecer en un entorno armónico
-            con los colores de la naturaleza.</p>
-
-        <!-- Cuadrícula con SVGs Ilustrativos -->
-        <div class="features-grid">
-
-            <!-- Tarjeta 1: Hoja / Crecimiento -->
-            <div class="feature-card">
-                <svg class="card-icon" viewBox="0 0 24 24">
-                    <path
-                        d="M17,8C8,10 59,16.17 3.82,21.34L5.23,22.75C11.4,17.58 14,9 17,8M12.43,15.58C12.12,14.6 11.5,13.62 10.5,12.75C8.16,10.68 4.79,10.29 2,11C2.5,13.88 3.5,17 6.5,18.88C8.13,19.9 9.89,20 11.38,19.62L12.43,15.58M17,3C12,3 8.44,6.25 7.08,9.77C9.37,9.75 11.83,10.5 13.75,12.2C15.67,13.9 16.5,16.32 16.29,18.61C19.68,16.94 22,13.2 22,8.5C22,5.4 19.5,3 17,3Z" />
-                </svg>
-                <h3>Diseño Orgánico</h3>
-                <p>Estilos inspirados en bosques, vegetación y paletas armónicas relajantes.</p>
+        <section id="inicio" class="hero-card">
+            <div class="status-badge">
+                <span class="status-dot"></span>
+                Backend Flask & Python Activo & Operativo
             </div>
 
-            <!-- Tarjeta 2: Montaña / Solidez -->
-            <div class="feature-card">
-                <svg class="card-icon" viewBox="0 0 24 24">
-                    <path d="M14,6L10.25,11L13.1,14.8L11.5,16C9.81,13.75 7,10 7,10L1,18H23L14,6Z" />
-                </svg>
-                <h3>Estructura Firme</h3>
-                <p>Potenciado por la solidez y velocidad del backend en Python y Flask.</p>
+            <h1>Ecosistema de Arquitectura & Stacks Modernos</h1>
+            <p class="subtitle">
+                Una experiencia interactiva desarrollada con Python y Flask para dominar los patrones,
+                trade-offs y principios que sostienen el software escalable contemporáneo.
+            </p>
+
+            <div class="hero-actions">
+                <a href="#quiz" class="btn-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8 5v14l11-7z" />
+                    </svg>
+                    Iniciar Quiz de Arquitectura
+                </a>
+                <a href="#autor" class="btn-secondary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                    </svg>
+                    Conocer al Autor
+                </a>
             </div>
 
-            <!-- Tarjeta 3: Agua / Fluidez -->
-            <div class="feature-card">
-                <svg class="card-icon" viewBox="0 0 24 24">
-                    <path d="M12,20A6,6 0 0,1 6,14C6,10 12,3.25 12,3.25C12,3.25 18,10 18,14A6,6 0 0,1 12,20Z" />
-                </svg>
-                <h3>Fluidez Visual</h3>
-                <p>Efectos modernos de cristal, sombras suaves e interacciones responsivas.</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="card-icon-box">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z" />
+                        </svg>
+                    </div>
+                    <h3>Desacoplamiento & Hexagonal</h3>
+                    <p>Puertos y adaptadores para aislar las reglas de negocio del framework y proveedores de infraestructura.</p>
+                </div>
 
+                <div class="feature-card">
+                    <div class="card-icon-box">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
+                        </svg>
+                    </div>
+                    <h3>Sistemas Distribuidos & EDA</h3>
+                    <p>Colas de mensajes, consistencia eventual y comunicación asíncrona para alta concurrencia.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="card-icon-box">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" />
+                        </svg>
+                    </div>
+                    <h3>Resiliencia & Cache-Aside</h3>
+                    <p>Mitigación de puntos únicos de fallo mediante Redis, circuit breakers y alta disponibilidad.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- AUTHOR SECTION -->
+        <section id="autor" class="author-section">
+            <div class="author-layout">
+                <div class="author-avatar-card">
+                    <div class="author-avatar-frame">
+                        <div class="author-avatar-inner">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z" />
+                            </svg>
+                        </div>
+                        <span class="author-badge-indicator">LEAD</span>
+                    </div>
+                    <span class="author-title-badge">Perfil Profesional</span>
+                </div>
+
+                <div class="author-info-content">
+                    <h2 class="author-name">Feibert Alirio Guzmán Pérez</h2>
+                    <div class="author-role">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z" />
+                        </svg>
+                        <span>Software Architect & Full-Stack Engineer</span>
+                    </div>
+
+                    <p class="author-quote">
+                        «La simplicidad, la cohesión y el desacoplamiento son el alma de las arquitecturas de software perdurables ante el cambio.»
+                    </p>
+
+                    <p class="author-bio">
+                        Diseñador y constructor de soluciones integrales con Python, Flask y ecosistemas en la nube.
+                        Enfocado en patrones arquitectónicos robustos (Hexagonal, Microservicios, EDA),
+                        optimización de stacks tecnológicos y entrega de software de alto impacto y mantenibilidad.
+                    </p>
+
+                    <div class="skills-container">
+                        <span class="skill-tag">🐍 Python / Flask</span>
+                        <span class="skill-tag">🏛️ Arquitectura Hexagonal</span>
+                        <span class="skill-tag">⚡ Microservicios & EDA</span>
+                        <span class="skill-tag">📨 Apache Kafka / RabbitMQ</span>
+                        <span class="skill-tag">🚀 Redis (Cache-Aside)</span>
+                        <span class="skill-tag">🐬 PostgreSQL / NoSQL</span>
+                        <span class="skill-tag">🐳 Docker & Cloud Native</span>
+                        <span class="skill-tag">📐 Clean Code & SOLID</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- QUIZ SECTION -->
+        <section id="quiz" class="quiz-section">
+            <div class="quiz-header">
+                <span class="quiz-section-tag">Desafío Técnico Interactivo</span>
+                <h2>Quiz de Stack & Arquitecturas de Software</h2>
+                <p>Pon a prueba tus conocimientos sobre patrones de diseño, sistemas distribuidos, trade-offs y stacks de producción.</p>
             </div>
 
-        </div>
-        <p align="center">Creado por Feibert Alirio Guzmán Pérez</p>
+            <div class="quiz-box">
+                <div class="quiz-progress-wrapper" id="quizProgressWrapper">
+                    <div class="quiz-meta-row">
+                        <span class="quiz-step-count" id="quizStepCount">Pregunta 1 de 6</span>
+                        <span class="quiz-category-badge" id="quizCategoryBadge">Arquitectura</span>
+                    </div>
+                    <div class="progress-bar-track">
+                        <div class="progress-bar-fill" id="progressBarFill"></div>
+                    </div>
+                </div>
+
+                <div id="quizQuestionContainer">
+                    <div class="question-topic" id="questionTopic">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        <span id="topicText">Tema de Arquitectura</span>
+                    </div>
+                    <h3 class="question-title" id="questionText">Cargando pregunta de arquitectura...</h3>
+
+                    <div class="options-list" id="optionsList"></div>
+
+                    <div class="feedback-box" id="feedbackBox">
+                        <div class="feedback-header" id="feedbackHeader">
+                            <span id="feedbackIcon"></span>
+                            <span id="feedbackTitle">Respuesta Correcta</span>
+                        </div>
+                        <p class="feedback-explanation" id="feedbackExplanation"></p>
+                    </div>
+
+                    <div class="quiz-footer">
+                        <button class="btn-next" id="btnNext" onclick="nextQuestion()">
+                            Siguiente Pregunta →
+                        </button>
+                    </div>
+                </div>
+
+                <div class="results-box" id="resultsBox">
+                    <div class="result-trophy" id="resultTrophy">🏆</div>
+                    <h3 class="result-rank-title" id="resultRankTitle">¡Evaluación Completada!</h3>
+                    <div class="result-score-badge" id="resultScoreBadge">Puntaje: 6 / 6 (100%)</div>
+                    <p class="result-desc" id="resultDesc">
+                        Has demostrado un dominio excepcional de los fundamentos de arquitectura de software y selección de stacks.
+                    </p>
+                    <button class="btn-restart" onclick="restartQuiz()">
+                        🔄 Reintentar Quiz
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Plataforma de Arquitectura & Stacks de Software &bull; Desarrollada con <strong>Python</strong> & <strong>Flask</strong></p>
+            <p style="margin-top: 6px;">Creado con pasión ingenieril por <strong>Feibert Alirio Guzmán Pérez</strong></p>
+        </footer>
+
     </div>
 
+    <script>
+        let questionsData = [
+            {
+                "id": 1,
+                "category": "Arquitectura de Software",
+                "topic": "Arquitectura Hexagonal (Ports & Adapters)",
+                "question": "¿Cuál es el propósito principal de la Arquitectura Hexagonal?",
+                "options": [
+                    "Obligar al uso de bases de datos NoSQL para ganar escalabilidad horizontal.",
+                    "Aislar la lógica de dominio de frameworks, bases de datos y agentes externos mediante interfaces y adaptadores.",
+                    "Reemplazar las APIs REST por WebSockets para comunicación bidireccional.",
+                    "Empaquetar la aplicación en exactamente seis contenedores Docker independientes."
+                ],
+                "answer": 1,
+                "explanation": "La Arquitectura Hexagonal desacopla el núcleo de negocio (dominio) de los detalles de infraestructura externa (UI, BD, APIs de terceros) mediante puertos (interfaces) y adaptadores (implementaciones concretas)."
+            },
+            {
+                "id": 2,
+                "category": "Estrategia de Stack",
+                "topic": "Monolito Modular vs Microservicios",
+                "question": "En un sistema en fase temprana con un equipo pequeño, ¿por qué suele recomendarse un Monolito Modular antes que Microservicios?",
+                "options": [
+                    "Porque los microservicios son incompatibles con bases de datos relacionales como PostgreSQL.",
+                    "Para evitar la sobrecarga operacional (latencia de red, consistencia distribuida, despliegues complejos) y acelerar iteraciones.",
+                    "Porque un monolito siempre tiene menor consumo de memoria y CPU sin importar la carga.",
+                    "Porque los monolitos no requieren pruebas unitarias ni entornos de integración continua."
+                ],
+                "answer": 1,
+                "explanation": "Los microservicios añaden complejidad distribuida significativa (observabilidad, transacciones complejas, orquestación). Un monolito bien modularizado permite iterar y refactorizar con alta velocidad sin esa sobrecarga."
+            },
+            {
+                "id": 3,
+                "category": "Sistemas Distribuidos",
+                "topic": "Arquitectura Orientada a Eventos (EDA) & Brokers",
+                "question": "Al integrar un Message Broker como Apache Kafka o RabbitMQ, ¿qué ventaja ofrece el desacoplamiento temporal?",
+                "options": [
+                    "Permite a los productores emitir eventos sin depender de que los consumidores estén activos o procesen de inmediato.",
+                    "Elimina por completo la necesidad de almacenamiento persistente en bases de datos.",
+                    "Garantiza que el tiempo de respuesta HTTP hacia el cliente final sea 0 ms.",
+                    "Hace innecesario el uso de cifrado TLS o protocolos seguros en la red."
+                ],
+                "answer": 0,
+                "explanation": "El desacoplamiento temporal posibilita la comunicación asíncrona: los productores publican mensajes a la cola/tópico y los consumidores procesan a su propio ritmo según su capacidad."
+            },
+            {
+                "id": 4,
+                "category": "Teoría de Sistemas",
+                "topic": "Teorema CAP & Consistencia",
+                "question": "En presencia de una partición de red (P) en un sistema distribuido, ¿qué establece el Teorema CAP?",
+                "options": [
+                    "Se debe elegir entre usar Python o Go para optimizar el throughput de la partición.",
+                    "Se debe elegir entre Consistencia (C: todos los nodos ven el mismo dato) o Disponibilidad (A: cada petición recibe respuesta).",
+                    "El sistema se recupera automáticamente duplicando la memoria de los nodos afectados.",
+                    "La partición debe resolverse reiniciando inmediatamente todos los servidores de base de datos."
+                ],
+                "answer": 1,
+                "explanation": "El Teorema CAP demuestra que ante un fallo de red inevitable (P), no es posible garantizar simultáneamente consistencia estricta (C) y disponibilidad total (A); se debe priorizar una de las dos."
+            },
+            {
+                "id": 5,
+                "category": "Rendimiento y Stack",
+                "topic": "Patrón Cache-Aside (Lazy Loading)",
+                "question": "¿Cómo opera el patrón Cache-Aside con una base de datos relacional y un caché en memoria como Redis?",
+                "options": [
+                    "La aplicación consulta primero el caché; ante un 'cache miss', lee de la BD, guarda el dato en Redis y retorna el resultado.",
+                    "La base de datos actualiza el caché de forma síncrona en cada transacción antes del commit en disco.",
+                    "Todas las solicitudes de lectura y escritura son redirigidas exclusivamente a la memoria RAM del cliente.",
+                    "El caché reemplaza completamente el almacenamiento físico de la base de datos."
+                ],
+                "answer": 0,
+                "explanation": "En Cache-Aside, la aplicación administra directamente el caché: si el dato está en Redis se retorna de inmediato; si no, se busca en la base de datos y se carga en el caché con un TTL apropiado."
+            },
+            {
+                "id": 6,
+                "category": "Patrones de Integración",
+                "topic": "Backend for Frontend (BFF)",
+                "question": "¿Cuál es la motivación técnica primordial para implementar el patrón BFF?",
+                "options": [
+                    "Permitir que un solo archivo HTML sea renderizado en microcontroladores sin navegador.",
+                    "Crear una capa de backend optimizada específicamente para las necesidades de consumo de cada cliente (Web, Móvil, IoT).",
+                    "Eliminar la necesidad de autenticación y autorización en los servicios de negocio.",
+                    "Migrar automáticamente código de frontend en JavaScript a código backend en C++."
+                ],
+                "answer": 1,
+                "explanation": "El patrón BFF crea servicios de backend dedicados para cada experiencia de usuario (ej. app móvil vs desktop), adaptando payloads, agregando llamadas y minimizando el uso de red según las características de cada cliente."
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let answered = false;
+
+        fetch('/api/quiz')
+            .then(res => res.ok ? res.json() : Promise.reject())
+            .then(data => {
+                if (data.questions && data.questions.length > 0) {
+                    questionsData = data.questions;
+                    renderQuestion();
+                }
+            })
+            .catch(() => {
+                renderQuestion();
+            });
+
+        function renderQuestion() {
+            answered = false;
+            const q = questionsData[currentQuestionIndex];
+            const total = questionsData.length;
+
+            document.getElementById('quizStepCount').textContent = `Pregunta ${currentQuestionIndex + 1} de ${total}`;
+            document.getElementById('quizCategoryBadge').textContent = q.category;
+            document.getElementById('topicText').textContent = q.topic;
+            document.getElementById('questionText').textContent = q.question;
+
+            const percent = (currentQuestionIndex / total) * 100;
+            document.getElementById('progressBarFill').style.width = `${percent}%`;
+
+            const feedbackBox = document.getElementById('feedbackBox');
+            feedbackBox.style.display = 'none';
+            document.getElementById('btnNext').style.display = 'none';
+
+            const optionsList = document.getElementById('optionsList');
+            optionsList.innerHTML = '';
+            const letters = ['A', 'B', 'C', 'D'];
+
+            q.options.forEach((opt, idx) => {
+                const optEl = document.createElement('div');
+                optEl.className = 'option-item';
+                optEl.id = `option-${idx}`;
+                optEl.onclick = () => selectOption(idx);
+
+                optEl.innerHTML = `
+                    <div class="option-indicator">${letters[idx]}</div>
+                    <div class="option-text">${opt}</div>
+                `;
+                optionsList.appendChild(optEl);
+            });
+        }
+
+        function selectOption(selectedIndex) {
+            if (answered) return;
+            answered = true;
+
+            const q = questionsData[currentQuestionIndex];
+            const isCorrect = (selectedIndex === q.answer);
+
+            if (isCorrect) {
+                score++;
+            }
+
+            q.options.forEach((_, idx) => {
+                const item = document.getElementById(`option-${idx}`);
+                item.classList.add('disabled');
+                if (idx === q.answer) {
+                    item.classList.add('correct');
+                } else if (idx === selectedIndex && !isCorrect) {
+                    item.classList.add('incorrect');
+                }
+            });
+
+            const feedbackBox = document.getElementById('feedbackBox');
+            const feedbackHeader = document.getElementById('feedbackHeader');
+            const feedbackTitle = document.getElementById('feedbackTitle');
+            const feedbackIcon = document.getElementById('feedbackIcon');
+            const feedbackExplanation = document.getElementById('feedbackExplanation');
+
+            feedbackBox.style.display = 'block';
+            if (isCorrect) {
+                feedbackHeader.className = 'feedback-header is-correct';
+                feedbackIcon.textContent = '✅';
+                feedbackTitle.textContent = '¡Correcto! Análisis Arquitectónico acertado';
+            } else {
+                feedbackHeader.className = 'feedback-header is-incorrect';
+                feedbackIcon.textContent = '💡';
+                feedbackTitle.textContent = 'Respuesta Incorrecta — Consideración de Diseño:';
+            }
+            feedbackExplanation.textContent = q.explanation;
+
+            const btnNext = document.getElementById('btnNext');
+            btnNext.style.display = 'inline-block';
+            btnNext.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questionsData.length) {
+                renderQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('progressBarFill').style.width = '100%';
+            document.getElementById('quizProgressWrapper').style.display = 'none';
+            document.getElementById('quizQuestionContainer').style.display = 'none';
+
+            const total = questionsData.length;
+            const percentage = Math.round((score / total) * 100);
+
+            const trophyEl = document.getElementById('resultTrophy');
+            const rankTitleEl = document.getElementById('resultRankTitle');
+            const scoreBadgeEl = document.getElementById('resultScoreBadge');
+            const descEl = document.getElementById('resultDesc');
+
+            scoreBadgeEl.textContent = `Puntuación: ${score} / ${total} (${percentage}%)`;
+
+            if (score === total) {
+                trophyEl.textContent = '🏆';
+                rankTitleEl.textContent = '¡Principal Software Architect!';
+                descEl.textContent = '¡Nivel Legendario! Posees un dominio absoluto de patrones de arquitectura (Hexagonal, Event-Driven, BFF), gestión de estado distribuido y trade-offs críticos de stack.';
+            } else if (score >= total * 0.7) {
+                trophyEl.textContent = '🚀';
+                rankTitleEl.textContent = 'Senior Systems Engineer';
+                descEl.textContent = '¡Gran rendimiento! Demuestras una comprensión sólida del diseño de sistemas, resiliencia y desacoplamiento en producción.';
+            } else if (score >= total * 0.4) {
+                trophyEl.textContent = '🛠️';
+                rankTitleEl.textContent = 'Full-Stack Developer en Ascenso';
+                descEl.textContent = '¡Buen esfuerzo! Cuentas con bases de desarrollo claras; profundizar en el Teorema CAP, EDA y Cache-Aside llevará tu arquitectura al siguiente nivel.';
+            } else {
+                trophyEl.textContent = '💡';
+                rankTitleEl.textContent = 'Explorador de Arquitectura';
+                descEl.textContent = '¡Todo gran arquitecto comienza con los fundamentos! Revisa las explicaciones de cada pregunta y vuelve a intentarlo para afianzar conceptos clave.';
+            }
+
+            document.getElementById('resultsBox').style.display = 'block';
+            document.getElementById('resultsBox').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            answered = false;
+
+            document.getElementById('resultsBox').style.display = 'none';
+            document.getElementById('quizProgressWrapper').style.display = 'block';
+            document.getElementById('quizQuestionContainer').style.display = 'block';
+
+            renderQuestion();
+        }
+
+        renderQuestion();
+    </script>
 </body>
 
 </html>
