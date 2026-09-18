@@ -90,7 +90,7 @@ QUIZ_QUESTIONS = [
 ]
 
 AUTHOR_INFO = {
-    "name": "Miguel Ángel Raygosa Sánchez",
+    "name": "Miguel Ángel Raigosa Sánchez",
     "role": "Ingeniería Informática (6.° Semestre) | Desarrollador Full Stack & Web",
     "bio": "Estudiante de sexto semestre de Ingeniería Informática y Desarrollador Full Stack & Web. Apasionado por Python, Flask, diseño de arquitecturas limpias y tecnologías web modernas y escalables.",
     "skills": ["Full-Stack & Web Dev", "Python / Flask", "JavaScript Moderno", "Arquitectura de Software", "APIs RESTful", "Bases de Datos", "Docker & Git", "Clean Code"],
