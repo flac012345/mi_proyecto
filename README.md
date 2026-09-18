@@ -5,7 +5,10 @@
 ![Render](https://img.shields.io/badge/Render-Deployed-46E3B7?style=for-the-badge&logo=render&logoColor=white)
 ![Licencia](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-Una aplicación web moderna y elegante construida con **Python** y **Flask**, diseñada con un estilo orgánico inspirado en los colores de la naturaleza, efectos de cristal esmerilado (*glassmorphism*), tipografía sobria y gráficos vectoriales **SVG**.
+Una aplicación web moderna y elegante construida con **Python** y **Flask**, diseñada con un estilo orgánico y tecnológico, gráficos interactivos en **3D con Three.js**, efectos de cristal esmerilado (*glassmorphism*), quiz de arquitectura de software y cero emoticones.
+
+> 🌐 **Aplicación en Vivo (Render):** [https://mi-proyecto-5yq1.onrender.com](https://mi-proyecto-5yq1.onrender.com/)  
+> 💻 **Repositorio en GitHub:** [https://github.com/flac012345/mi_proyecto](https://github.com/flac012345/mi_proyecto)
 
 ---
 
@@ -288,3 +291,15 @@ Abre tu navegador en:
 **Miguel Ángel Raigosa Sánchez**
 - Estudiante de 6.° Semestre de Ingeniería Informática
 - Desarrollador Full Stack & Web
+
+---
+
+## 🔗 Evidencias de Entrega y Despliegue
+
+| Recurso | Detalle / Enlace |
+| :--- | :--- |
+| **Aplicación Desplegada en Vivo (Render)** | [https://mi-proyecto-5yq1.onrender.com](https://mi-proyecto-5yq1.onrender.com/) |
+| **Repositorio Oficial de Código (GitHub)** | [https://github.com/flac012345/mi_proyecto](https://github.com/flac012345/mi_proyecto) |
+| **Rama de Entrega / Pull Request** | `feature/miguel-raigosa` & `main` |
+| **Características Clave** | Servidor Flask en producción con Gunicorn, modelo 3D interactivo con Three.js, quiz de arquitectura técnica, cero emoticones e iconografía SVG pura. |
+
